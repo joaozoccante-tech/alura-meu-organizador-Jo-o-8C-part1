@@ -1,0 +1,358 @@
+/* Reset e Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #050508;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Fundo Tridimensional e Objetos Flutuantes */
+.bg-3d-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(10px);
+    opacity: 0.7;
+    animation: float 12s infinite ease-in-out alternate;
+}
+
+.sphere1 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle at 30% 30%, #ff0055, #80002a, #000);
+    top: 10%;
+    left: 5%;
+    box-shadow: 0 0 50px rgba(255, 0, 85, 0.4);
+}
+
+.sphere2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle at 30% 30%, #0066ff, #002b80, #000);
+    bottom: 10%;
+    right: 5%;
+    animation-delay: -4s;
+    box-shadow: 0 0 60px rgba(0, 102, 255, 0.4);
+}
+
+.sphere3 {
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle at 30% 30%, #ff0055, #0066ff);
+    top: 60%;
+    left: 15%;
+    animation-delay: -7s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg) translateZ(0px);
+    }
+    50% {
+        transform: translateY(-40px) rotate(180deg) translateZ(50px);
+    }
+    100% {
+        transform: translateY(20px) rotate(360deg) translateZ(-30px);
+    }
+}
+
+/* Container Principal da Aplicação */
+.app-container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Cabeçalho */
+.header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding: 30px 20px;
+    background: rgba(20, 20, 30, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff0055, #0066ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.description {
+    color: #cccccc;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+/* Seções e Cards em Glassmorphism */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.task-section, .tips-section {
+    background: rgba(15, 15, 25, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h2 i {
+    color: #ff0055;
+}
+
+/* Input e Lista de Tarefas */
+.task-input-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.task-input-box input {
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.task-input-box input:focus {
+    border-color: #0066ff;
+    box-shadow: 0 0 12px rgba(0, 102, 255, 0.4);
+}
+
+.task-input-box button {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff0055, #0066ff);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.task-input-box button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 85, 0.4);
+}
+
+.task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.task-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.task-item.done span:first-child {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.tag {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(0, 255, 136, 0.15);
+    color: #00ff88;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.tag.pending {
+    background: rgba(255, 0, 85, 0.15);
+    color: #ff0055;
+    border: 1px solid rgba(255, 0, 85, 0.3);
+}
+
+/* Grid de Cards de Dicas */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.tip-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.tip-card:hover {
+    transform: translateY(-8px);
+    border-color: #0066ff;
+    box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+}
+
+.card-icon {
+    font-size: 1.8rem;
+    color: #ff0055;
+    margin-bottom: 12px;
+}
+
+.tip-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.tip-card p {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.4;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    font-size: 0.85rem;
+    color: #0066ff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Modal Efeito de Destaque */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-box {
+    background: #0d0d14;
+    border: 2px solid transparent;
+    border-image: linear-gradient(135deg, #ff0055, #0066ff) 1;
+    border-radius: 20px;
+    padding: 35px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 0 50px rgba(255, 0, 85, 0.3), 0 0 50px rgba(0, 102, 255, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-box {
+    transform: scale(1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.modal-header i {
+    font-size: 2rem;
+    color: #ff0055;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.modal-body p {
+    color: #ddd;
+    line-height: 1.6;
+    font-size: 1rem;
+}

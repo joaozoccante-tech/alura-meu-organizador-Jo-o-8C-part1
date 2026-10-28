@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador do João Gustavo</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones FontAwesome para os cards -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Objetos 3D Flutuando ao Fundo -->
+    <div class="bg-3d-container">
+        <div class="shape sphere1"></div>
+        <div class="shape sphere2"></div>
+        <div class="shape sphere3"></div>
+        <div class="shape cube-glow"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Cabeçalho e Descrição -->
+        <header class="header">
+            <h1 class="title">Organizador do João Gustavo</h1>
+            <p class="description">
+                Sua plataforma pessoal para gerenciar rotinas, otimizar tarefas diárias e manter o foco na evolução constante. Navegue pelas seções abaixo e clique nos cards de dicas para expandir métodos práticos de produtividade.
+            </p>
+        </header>
+
+        <main class="main-content">
+            <!-- Seção de Gerenciador Simulado de Tarefas -->
+            <section class="task-section">
+                <h2><i class="fa-solid fa-list-check"></i> Minha Rotina & Tarefas</h2>
+                <div class="task-input-box">
+                    <input type="text" id="taskInput" placeholder="Adicionar nova tarefa ou hábito...">
+                    <button id="addTaskBtn"><i class="fa-solid fa-plus"></i> Adicionar</button>
+                </div>
+                <ul class="task-list" id="taskList">
+                    <li class="task-item done">
+                        <span><i class="fa-regular fa-circle-check"></i> Planejar as metas da semana</span>
+                        <span class="tag">Concluído</span>
+                    </li>
+                    <li class="task-item">
+                        <span><i class="fa-regular fa-circle"></i> Revisar prioridades diárias</span>
+                        <span class="tag pending">Pendente</span>
+                    </li>
+                    <li class="task-item">
+                        <span><i class="fa-regular fa-circle"></i> Bloqueio de tempo para estudo/foco</span>
+                        <span class="tag pending">Pendente</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Seção de Cards Interativos com Dicas -->
+            <section class="tips-section">
+                <h2><i class="fa-solid fa-lightbulb"></i> Cards de Dicas & Estratégias</h2>
+                <div class="cards-grid">
+                    
+                    <!-- Card 1 -->
+                    <div class="tip-card" onclick="openModal('tip1')">
+                        <div class="card-icon"><i class="fa-solid fa-clock"></i></div>
+                        <h3>Técnica Pomodoro</h3>
+                        <p>Trabalhe em blocos de foco de 25 minutos seguidos por 5 minutos de pausa rápida...</p>
+                        <span class="read-more">Clique para ver mais <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="tip-card" onclick="openModal('tip2')">
+                        <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
+                        <h3>Matriz de Eisenhower</h3>
+                        <p>Classifique suas tarefas entre urgente vs. importante para priorizar com precisão...</p>
+                        <span class="read-more">Clique para ver mais <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="tip-card" onclick="openModal('tip3')">
+                        <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>Higiene do Sono & Foco</h3>
+                        <p>Otimize sua rotina noturna e matinal para garantir energia máxima ao longo do dia...</p>
+                        <span class="read-more">Clique para ver mais <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Estrutura do Modal Interativo -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div id="modalContent">
+                <!-- Conteúdo injetado via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Inline Simples para Funcionalidade dos Cards e Lista -->
+    <script>
+        const tipsData = {
+            tip1: {
+                title: "Técnica Pomodoro",
+                icon: "fa-clock",
+                text: "A técnica Pomodoro é ideal para manter a concentração elevada sem exaurir a mente. Divida seu trabalho em blocos de 25 minutos (1 Pomodoro). Ao final de cada bloco, faça uma pausa curta de 5 minutos para descansar a visão e alongar-se. Após 4 blocos completos, faça uma pausa mais longa de 15 a 30 minutos."
+            },
+            tip2: {
+                title: "Matriz de Eisenhower",
+                icon: "fa-bullseye",
+                text: "Organize suas tarefas em 4 quadrantes:<br><br><b>1. Urgente & Importante:</b> Faça imediatamente.<br><b>2. Não Urgente & Importante:</b> Agende um horário para fazer.<br><b>3. Urgente & Não Importante:</b> Delegue se possível.<br><b>4. Nem Urgente nem Importante:</b> Elimine da sua rotina."
+            },
+            tip3: {
+                title: "Higiene do Sono & Foco",
+                icon: "fa-brain",
+                text: "O rendimento das suas rotinas depende diretamente do seu descanso. Evite telas de luz azul 1 hora antes de dormir, mantenha horários regulares para acordar e busque expor-se à luz natural logo nos primeiros minutos do dia para alinhar seu ritmo circadiano e aumentar seu foco."
+            }
+        };
+
+        function openModal(tipKey) {
+            const tip = tipsData[tipKey];
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="modal-header">
+                    <i class="fa-solid ${tip.icon}"></i>
+                    <h2>${tip.title}</h2>
+                </div>
+                <div class="modal-body">
+                    <p>${tip.text}</p>
+                </div>
+            `;
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        // Fechar modal ao clicar fora da caixa
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Adicionar Tarefas na lista simulada
+        document.getElementById('addTaskBtn').addEventListener('click', function() {
+            const input = document.getElementById('taskInput');
+            if (input.value.trim() !== "") {
+                const ul = document.getElementById('taskList');
+                const li = document.createElement('li');
+                li.className = 'task-item';
+                li.innerHTML = `<span><i class="fa-regular fa-circle"></i> ${input.value}</span><span class="tag pending">Pendente</span>`;
+                li.onclick = function() {
+                    this.classList.toggle('done');
+                    const icon = this.querySelector('i');
+                    const tag = this.querySelector('.tag');
+                    if (this.classList.contains('done')) {
+                        icon.className = 'fa-regular fa-circle-check';
+                        tag.className = 'tag';
+                        tag.innerText = 'Concluído';
+                    } else {
+                        icon.className = 'fa-regular fa-circle';
+                        tag.className = 'tag pending';
+                        tag.innerText = 'Pendente';
+                    }
+                };
+                ul.appendChild(li);
+                input.value = "";
+            }
+        });
+    </script>
+</body>
+</html>
